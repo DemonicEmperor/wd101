@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration form</title>
+    <link rel="stylesheet" href="/index.css" />
+    <script
+      src="https://kit.fontawesome.com/690d6ae623.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="flex flex-col items-center justify-center bg-gray-100 p-4">
+    <div class="container shadow-lg max-w-sm">
+      <h1 class="text-3xl font-bold text-center">Registration Form</h1>
+      <form action="" method="get" class="" id="form">
+        <div class="username">
+          <label for="name">Name</label>
+          <i class="fa-solid fa-user user"></i>
+          <input type="text" id="name" name="name" required />
+          <i class="fa-solid fa-circle-exclamation error"></i>
+          <i class="fa-regular fa-circle-check correct"></i>
+        </div>
+
+        <div class="useremail">
+          <label for="email">Email</label>
+          <i class="fa-solid fa-envelope mail"></i>
+          <input type="email" name="email" id="email" />
+          <i class="fa-solid fa-circle-exclamation error"></i>
+          <i class="fa-regular fa-circle-check correct"></i>
+        </div>
+        <div class="password">
+          <label for="password">Password</label>
+          <i class="fa-solid fa-lock lock"></i>
+          <input type="password" id="password" />
+          <i class="fa-solid fa-circle-exclamation error"></i>
+          <i class="fa-regular fa-circle-check correct"></i>
+        </div>
+        <div class="date">
+          <label for="date">Date</label>
+          <input type="date" id="date" />
+        </div>
+        <label for="checkbox"
+          ><input type="checkbox" id="checkbox" />Accepted terms and
+          conditions</label
+        >
+        <p id="errormsg"></p>
+        <div class="submit">
+          <button id="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+
+    <div
+      class="user-entries w-full max-w-3xl bg-white shadow-lg rounded-lg p-6"
+    >
+      <h1 class="text-3xl font-semibold text-center mb-3 p-5">Entries</h1>
+      <table
+        class="table-auto w-full max-w-3xl border border-gray-300 text-center"
+      >
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>DOB</th>
+            <th>Accepted Terms</th>
+          </tr>
+        </thead>
+        <tbody id="table-body" class="max-w-3xl"></tbody>
+      </table>
+    </div>
+    <script src="/index.js"></script>
+  </body>
+</html>
