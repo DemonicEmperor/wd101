@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<<<<<<< HEAD
     <title>Registration form</title>
     <link rel="stylesheet" href="index.css" />
     <script
@@ -10,67 +11,113 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+=======
+    <title>Registration Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+>>>>>>> a5740cb (WD101)
   </head>
-  <body class="flex flex-col items-center justify-center bg-gray-100 p-4">
-    <div class="container shadow-lg max-w-sm">
-      <h1 class="text-3xl font-bold text-center">Registration Form</h1>
-      <form action="" method="get" class="" id="form">
-        <div class="username">
-          <label for="name">Name</label>
-          <i class="fa-solid fa-user user"></i>
-          <input type="text" id="name" name="name" required />
-          <i class="fa-solid fa-circle-exclamation error"></i>
-          <i class="fa-regular fa-circle-check correct"></i>
-        </div>
-
-        <div class="useremail">
-          <label for="email">Email</label>
-          <i class="fa-solid fa-envelope mail"></i>
-          <input type="email" name="email" id="email" />
-          <i class="fa-solid fa-circle-exclamation error"></i>
-          <i class="fa-regular fa-circle-check correct"></i>
-        </div>
-        <div class="password">
-          <label for="password">Password</label>
-          <i class="fa-solid fa-lock lock"></i>
-          <input type="password" id="password" />
-          <i class="fa-solid fa-circle-exclamation error"></i>
-          <i class="fa-regular fa-circle-check correct"></i>
-        </div>
-        <div class="date">
-          <label for="date">Date</label>
-          <input type="date" id="date" />
-        </div>
-        <label for="checkbox"
-          ><input type="checkbox" id="checkbox" />Accepted terms and
-          conditions</label
-        >
-        <p id="errormsg"></p>
-        <div class="submit">
-          <button id="submit">Submit</button>
-        </div>
-      </form>
-    </div>
-
+  <body>
     <div
-      class="user-entries w-full max-w-3xl bg-white shadow-lg rounded-lg p-6"
+      class="relative flex min-h-screen flex-col jsutify-center overflow-hidden py-6 bg-gray-50"
     >
-      <h1 class="text-3xl font-semibold text-center mb-3 p-5">Entries</h1>
-      <table
-        class="table-auto w-full max-w-3xl border border-gray-300 text-center"
+      <div
+        class="relative bg-white px-6 pb-5 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10"
       >
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Password</th>
-            <th>DOB</th>
-            <th>Accepted Terms</th>
-          </tr>
-        </thead>
-        <tbody id="table-body" class="max-w-3xl"></tbody>
-      </table>
+        <div class="mx-auto max-w-md">
+          <h2 class="text-2xl text-center font-bold my-5">Registration From</h2>
+          <div class="divide-y divide-gray-300/50">
+            <div class="space-y-6 text-base leading-7 text-ray-600">
+              <form action="" id="user_form">
+                <label
+                  for="name"
+                  class="text-md w-40 inline-block font-medium leading-5 text-gray-700"
+                  >Name</label
+                >
+                <input
+                  required
+                  type="text"
+                  id="name"
+                  name="name"
+                  class="bg-gray-100 inline-block rounded-lg shadow-md py-3 px-4 mb-5 text-base leading-6 placeolder-gray-500"
+                  placeholder="Enter full name"
+                  required
+                /><br />
+                <label
+                  for="email"
+                  class="text-md w-40 inline-block font-medium leading-3 text-gray-700"
+                  >Email</label
+                >
+                <input
+                  required
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="bg-gray-100 inline-block rounded-lg shadow-md py-3 px-4 mb-5 text-base leading-6 placeolder-gray-500"
+                  placeholder="Enter email"
+                /><br />
+                <label
+                  for="password"
+                  class="text-md w-40 inline-block font-medium leading-5 text-gray-700"
+                  >Password</label
+                >
+                <input
+                  required
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="bg-gray-100 inline-block rounded-lg shadow-md py-3 px-4 mb-5 text-base leading-6 placeolder-gray-500"
+                  placeholder="Enter password"
+                /><br />
+                <label
+                  for="dob"
+                  class="text-md w-40 inline-block font-medium leading-5 text-gray-700"
+                  >Date of Birth</label
+                >
+                <input
+                  required
+                  type="date"
+                  id="dob"
+                  name="dob"
+                  class="bg-gray-100 inline-block rounded-lg shadow-md py-3 px-4 mb-5 text-base leading-6 placeolder-gray-500"
+                  placeholder="dd/mm/yyyy"
+                /><br />
+                <label
+                  for="acceptTerms"
+                  class="text-md w-50 inline-block font-medium leading-5 text-gray-700 mr-4"
+                  >Accept our Terms & Conditions</label
+                >
+                <input
+                  required
+                  type="checkbox"
+                  name="acceptTerms"
+                  id="acceptTerms"
+                  class="bg-gray-100 inline-block shadow-md px-4 py-3 mb-5 text-base leading-6 placeholder-gray-500"
+                /><br />
+                <button
+                  type="submit"
+                  id="submit"
+                  class="w-fit rounded-lg shadow-lg px-5 py-3 bg-green-500 text-white hover:bg-green-400 focus:outline-none focus block"
+                >
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="relative bg-white px-4 mt-5 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:rounded-lg sm:px-10"
+      >
+        <div class="mx-auto">
+          <h2 class="text-xl text-center font-bold leadin-right">Entries</h2>
+          <div class="divide-y divide-gray-300/50" id="user-entries"></div>
+        </div>
+      </div>
     </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> a5740cb (WD101)
     <script src="index.js"></script>
   </body>
 </html>

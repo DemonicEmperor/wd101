@@ -1,107 +1,80 @@
-let id = (value) => {
-  return document.getElementById(value);
+let userForm = document.getElementById("user_form");
+let userEntries = [];
+if (localStorage.getItem("userEntries") === null) {
+  userEntries = [];
+  console.log("if");
+} else {
+  userEntries = JSON.parse(localStorage.getItem("userEntries"));
+  console.log("else");
+}
+//console.log(userEntries);
+
+let errors = [];
+const retieveEntries = () => {
+  let entries = localStorage.getItem("userEntries");
+  if (entries) {
+    entries = JSON.parse(entries);
+  } else {
+    entries = [];
+  }
+  return entries;
+};
+const displayEntries = () => {
+  let entries = retieveEntries();
+  const tbleEntries = entries
+    .map((entry) => {
+      const nameCell = `<td class='border px-4 py-2'>${entry.FullName}</td>`;
+      const emailCell = `<td class='border px-4 py-2'>${entry.email}</td>`;
+      const passwordCell = `<td class='border px-4 py-2'>${entry.password}</td>`;
+      const dobCell = `<td class='border px-4 py-2'>${entry.dob}</td>`;
+      const acceptTermsCell = `<td class='border px-4 py-2'>${entry.acceptTerms}</td>`;
+      const row = `<tr>${nameCell} ${emailCell} ${passwordCell} ${dobCell} ${acceptTermsCell}</tr>`;
+      return row;
+    })
+    .join("\n");
+  const table = ` <table class='table-auto w-full'>
+    <tr>
+    <th class='px-4 py-2 '>Name </th>
+    <th class='px-4 py-2 '>Email </th>
+    <th class='px-4 py-2 '>Password </th>
+    <th class='px-4 py-2 '>Dob </th>
+    <th class='px-4 py-2 '>Accepted terms? </th>
+    </tr>${tbleEntries}
+</table>`;
+  let details = document.getElementById("user-entries");
+  details.innerHTML = table;
 };
 
-let classes = (value) => {
-  return document.getElementsByClassName(value);
-};
-let entries = [];
-let uname = id("name"),
-  email = id("email"),
-  password = id("password"),
-  date = id("date"),
-  erroricon = classes("error"),
-  correcticon = classes("correct"),
-  errormsg = id("errormsg"),
-  form = id("form"),
-  checkbox = id("checkbox"),
-  tableBody = id("table-body");
-
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  let errors = [];
-  emailregex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  if (uname.value === "") {
-    errors.push("Please enter your name");
-    erroricon[0].style.opacity = 1;
-    correcticon[0].style.opacity = 0;
-  } else if (uname.value.length < 3) {
-    errors.push("Name must be at least 3 characters long");
-    erroricon[0].style.opacity = 1;
-    correcticon[0].style.opacity = 0;
+const saveUserForm = (event) => {
+  event.preventDefault();
+  const FullName = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const dob = document.getElementById("dob").value;
+  const acceptTerms = document.getElementById("acceptTerms").checked;
+  var currentYear = new Date().getFullYear();
+  var birthYear = dob.split("-");
+  let year = birthYear[0];
+  var age = currentYear - year;
+  console.log({ age, currentYear, birthYear });
+  if (age < 18 || age > 55) {
+    document.getElementById("dob").style = "border:1px solid red";
+    return alert("Age must be between 18 and 55");
   } else {
-    errormsg.innerHTML = "";
-    erroricon[0].style.opacity = 0;
-    correcticon[0].style.opacity = 1;
-  }
+    document.getElementById("dob").style = "border:none";
 
-  if (email.value === "") {
-    errors.push("Please enter your email address");
-    erroricon[1].style.opacity = 1;
-    correcticon[1].style.opacity = 0;
-  } else if (!emailregex.test(email.value)) {
-    errors.push("Please enter a valid email address");
-    erroricon[1].style.opacity = 1;
-    correcticon[1].style.opacity = 0;
-  } else {
-    errormsg.innerHTML = "";
-    erroricon[1].style.opacity = 0;
-    correcticon[1].style.opacity = 1;
-  }
-
-  if (password.value === "") {
-    errors.push("Please enter your password");
-    erroricon[2].style.opacity = 1;
-    correcticon[2].style.opacity = 0;
-  } else if (password.value.length < 8) {
-    errors.push("Password must be at least 8 characters long");
-    erroricon[2].style.opacity = 1;
-    correcticon[2].style.opacity = 0;
-  } else {
-    erroricon[2].style.opacity = 0;
-    correcticon[2].style.opacity = 1;
-  }
-
-  let dob = new Date(date.value);
-  let today = new Date();
-  let age = today.getFullYear() - dob.getFullYear();
-  let mon = today.getMonth() - dob.getMonth();
-
-  if (mon < 0 || (mon === 0 && today.getDate() < dob.getDate())) {
-    age--;
-  }
-  if (date.value === "") {
-    errors.push("Please enter your date of birth");
-  } else if (date.value > today) {
-    errors.push("Please enter a valid date of birth");
-  } else if (age < 18 || age > 55) {
-    errors.push("Age must be between 18 and 55");
-  }
-
-  errormsg.innerHTML = errors.join("<br>");
-  if (errors.length === 0) {
     const entry = {
-      Name: uname.value,
-      Email: email.value,
-      Password: password.value,
-      Date: date.value,
-      AcceptedTermsAndCondition: checkbox.checked,
+      FullName,
+      email,
+      password,
+      dob,
+      acceptTerms,
     };
-    entries.push(entry);
-    localStorage.setItem("User-Entries", JSON.stringify(entries));
-    let tableData = [];
-    Object.values(entry).forEach((value) => {
-      tableData.push(
-        `<td class="border-2 border-gray-300 px-4 py-2">${value}</td>`
-      );
-    });
-    let tableRow = `<tr>${tableData.join("")}</tr>`;
-    tableBody.innerHTML += tableRow;
-    form.reset();
-    for (let i = 0; i < Math.max(erroricon.length, correcticon.length); i++) {
-      if (erroricon[i]) erroricon[i].style.opacity = 0;
-      if (correcticon[i]) correcticon[i].style.opacity = 0;
-    }
+    userEntries.push(entry);
+    localStorage.setItem("userEntries", JSON.stringify(userEntries));
+    displayEntries();
+    userForm.reset();
   }
-});
+};
+userForm.addEventListener("submit", saveUserForm);
+displayEntries();
